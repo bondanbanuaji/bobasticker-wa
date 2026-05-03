@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+model ActivityLog {
+  id        String   @id @default(uuid())
+  action    String
+  adminId   String
+  metadata  Json?
+  createdAt DateTime @default(now())
+}
+
+model BotConfig {
+  id             String  @id @default("default")
+  prefix         String  @default(".")
+  maintenance    Boolean @default(false)
+  updatedAt      DateTime @updatedAt
+}

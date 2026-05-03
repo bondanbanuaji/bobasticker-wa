@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Montserrat", system-ui, sans-serif;
+  --font-heading: "Inter", system-ui, sans-serif;
+
+  /* WhatsApp Vibrant Palette */
+  --color-background: #f0f2f5; /* WhatsApp Grayish Background */
+  --color-foreground: #111b21; /* WhatsApp Deep Text */
+  
+  --color-card: #ffffff;
+  --color-card-foreground: #111b21;
+  
+  --color-primary: #25d366; /* WhatsApp Primary Green */
+  --color-primary-foreground: #ffffff;
+  
+  --color-secondary: #075e54; /* WhatsApp Dark Green */
+  --color-secondary-foreground: #ffffff;
+  
+  --color-muted: #ffffff;
+  --color-muted-foreground: #667781;
+  
+  --color-accent: #dcf8c6; /* WhatsApp Light Green Bubble */
+  --color-accent-foreground: #111b21;
+  
+  --color-destructive: #ea0038;
+  --color-destructive-foreground: #ffffff;
+  
+  --color-border: #e9edef;
+  --color-input: #ffffff;
+  --color-ring: #25d366;
+
+  --radius-xl: 16px;
+  --radius-lg: 12px;
+  --radius-md: 8px;
+  --radius-sm: 4px;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight text-[#111b21];
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #ced3d6;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #aebac1;
+}
