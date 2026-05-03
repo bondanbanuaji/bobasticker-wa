@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import type { BotLog } from '../hooks/useBotState';
 import { Card } from './ui/card';
 import { ScrollArea } from './ui/scroll-area';
