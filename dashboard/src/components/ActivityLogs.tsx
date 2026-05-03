@@ -3,14 +3,13 @@ import type { BotLog } from '../hooks/useBotState';
 import { Card } from './ui/card';
 import { ScrollArea } from './ui/scroll-area';
 import { Clock, Terminal, User, FileJson, Info } from 'lucide-react';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 
 interface ActivityLogsProps {
   logs: BotLog[];
 }
 
 export function ActivityLogs({ logs }: ActivityLogsProps) {
-  const [selectedLog, setSelectedLog] = useState<BotLog | null>(null);
 
   const formatAction = (action: string) => {
     return action.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
