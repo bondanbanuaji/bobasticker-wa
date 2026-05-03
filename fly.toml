@@ -1,16 +1,14 @@
-app = "bobasticker-wa"
-primary_region = "sin"  # Singapore — dekat Indonesia
+# fly.toml app configuration file generated for boba-sticker-v3-bondan-99 on 2026-05-04
+
+app = "boba-sticker-v3-bondan-99"
+primary_region = "sin"
 
 [build]
 
 [env]
-  PREFIX = "."
   NODE_ENV = "production"
   PORT = "3000"
-
-[mounts]
-  source = "wa_auth_data"
-  destination = "/data"
+  PREFIX = "."
 
 [http_service]
   internal_port = 3000
@@ -18,3 +16,12 @@ primary_region = "sin"  # Singapore — dekat Indonesia
   auto_stop_machines = false
   auto_start_machines = true
   min_machines_running = 1
+
+[mounts]
+  source = "wa_auth_data"
+  destination = "/data"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256MB"
+  cpus = 1
