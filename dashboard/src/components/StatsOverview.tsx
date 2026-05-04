@@ -46,18 +46,18 @@ export function StatsOverview({ stats }: StatsOverviewProps) {
   ];
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 2xl:gap-8">
       {items.map((item, idx) => (
-        <Card key={idx} className="p-6 bg-white border-slate-200 shadow-sm rounded-2xl flex flex-col gap-4 hover:shadow-md transition-all border-b-4 border-slate-100">
+        <Card key={idx} className="p-4 sm:p-5 md:p-6 bg-white border-slate-200 shadow-sm rounded-2xl flex flex-col gap-3 sm:gap-4 hover:shadow-md transition-all border-b-4 border-slate-100">
           <div className="flex items-center justify-between">
             <div className={`w-10 h-10 rounded-xl ${item.bg} flex items-center justify-center`}>
               <item.icon className={`w-5 h-5 ${item.color}`} />
             </div>
-            <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Realtime</span>
+            <span className="text-[10px] font-medium text-slate-300 uppercase tracking-widest">Realtime</span>
           </div>
           <div>
-            <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">{item.label}</p>
-            <p className="text-2xl font-black text-slate-900 tracking-tight">{item.value}</p>
+            <p className="text-[11px] font-medium text-slate-500 uppercase tracking-wider mb-1">{item.label}</p>
+            <p className="text-2xl font-medium text-slate-900 tracking-tight">{item.value}</p>
           </div>
         </Card>
       ))}

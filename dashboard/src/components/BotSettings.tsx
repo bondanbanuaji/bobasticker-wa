@@ -36,16 +36,16 @@ export function BotSettings({ config, onUpdate }: BotSettingsProps) {
   };
 
   return (
-    <Card className="p-6 bg-white border-slate-200 shadow-sm rounded-xl h-full flex flex-col">
+    <Card className="p-4 sm:p-5 md:p-6 bg-white border-slate-200 shadow-sm rounded-xl h-full flex flex-col">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+        <h3 className="text-base font-medium text-slate-900 flex items-center gap-2">
           <Settings className="w-4 h-4" />
           Pengaturan Sistem
         </h3>
         {hasChanges && (
           <Button 
             size="sm" 
-            className="bg-slate-900 hover:bg-slate-800 text-white rounded-md px-3 h-8 text-xs font-bold shadow-sm animate-in fade-in zoom-in"
+            className="bg-slate-900 hover:bg-slate-800 text-white rounded-md px-3 h-8 text-xs font-medium shadow-sm animate-in fade-in zoom-in"
             onClick={handleSave}
           >
             <Save className="w-3 h-3 mr-1.5" />
@@ -57,7 +57,7 @@ export function BotSettings({ config, onUpdate }: BotSettingsProps) {
       <div className="space-y-6 flex-grow">
         <div className="flex items-center justify-between p-4 rounded-lg border border-slate-100 bg-slate-50/50">
           <div className="space-y-0.5">
-            <Label className="text-sm font-bold text-slate-900 flex items-center gap-2">
+            <Label className="text-sm font-medium text-slate-900 flex items-center gap-2">
               <ShieldAlert className="w-4 h-4 text-slate-400" />
               Mode Pemeliharaan
             </Label>
@@ -73,7 +73,7 @@ export function BotSettings({ config, onUpdate }: BotSettingsProps) {
         </div>
 
         <div className="p-4 rounded-lg border border-slate-100 bg-slate-50/50 space-y-3">
-          <Label className="text-sm font-bold text-slate-900 flex items-center gap-2">
+          <Label className="text-sm font-medium text-slate-900 flex items-center gap-2">
             <Hash className="w-4 h-4 text-slate-400" />
             Awalan Perintah (Prefix)
           </Label>
@@ -85,7 +85,7 @@ export function BotSettings({ config, onUpdate }: BotSettingsProps) {
                 checkChanges(e.target.value, maintenance);
               }}
               placeholder="." 
-              className="h-9 bg-white border-slate-200 rounded-md font-bold text-center w-12"
+              className="h-9 bg-white border-slate-200 rounded-md font-medium text-center w-12"
               maxLength={1}
             />
             <div className="flex-grow flex items-center px-3 bg-white border border-slate-200 rounded-md text-[11px] text-slate-400 font-medium italic">
@@ -96,7 +96,7 @@ export function BotSettings({ config, onUpdate }: BotSettingsProps) {
       </div>
 
       <div className="mt-8 pt-4 border-t border-slate-100">
-        <p className="text-[10px] font-bold text-slate-300 uppercase tracking-widest text-center">Bot Engine v1.0.4</p>
+        <p className="text-[10px] font-medium text-slate-300 uppercase tracking-widest text-center">Bot Engine v1.0.4</p>
       </div>
     </Card>
   );

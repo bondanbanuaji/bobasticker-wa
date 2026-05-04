@@ -12,6 +12,7 @@ import { Card } from '../components/ui/card';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { Power, LogOut, RefreshCw, ServerOff, Activity, Smartphone, Plus, Send } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '../components/ui/dialog';
 import { toast } from 'sonner';
 
@@ -56,13 +57,15 @@ export function DashboardPage() {
     <div className="min-h-screen bg-[#f0f2f5] text-[#111b21] font-sans">
       
       {/* Navigation / Header */}
-      <nav className="sticky top-0 z-50 bg-[#075e54] text-white px-6 py-4 shadow-md">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <nav className="sticky top-0 z-50 bg-[#075e54] text-white px-4 sm:px-6 lg:px-8 py-4 shadow-md">
+        <div className="max-w-[1600px] mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-xl shadow-inner">🍵</div>
+            <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-inner">
+              <FaWhatsapp className="w-6 h-6 text-[#25d366]" />
+            </div>
             <div>
-              <h1 className="text-xl text-white font-bold tracking-tight leading-none">BobaSticker Hub</h1>
-              <p className="text-[10px] font-bold text-emerald-200 uppercase tracking-[0.2em] mt-1">Pro Admin Panel</p>
+              <h1 className="text-xl text-white font-medium tracking-tight leading-none">BobaSticker Hub</h1>
+              <p className="text-[10px] font-medium text-emerald-200 uppercase tracking-[0.2em] mt-1">Pro Admin Panel</p>
             </div>
           </div>
           
@@ -75,32 +78,32 @@ export function DashboardPage() {
             
             <button 
               onClick={signOut} 
-              className="text-sm font-bold text-white/80 hover:text-white transition-colors flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg"
+              className="text-sm font-medium text-white/80 hover:text-white transition-colors flex items-center gap-2 bg-white/10 p-2 md:px-3 md:py-1.5 rounded-lg"
             >
-              <LogOut className="w-4 h-4" />
-              Keluar
+              <LogOut className="w-5 h-5 md:w-4 md:h-4" />
+              <span className="hidden md:inline">Keluar</span>
             </button>
           </div>
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto p-6 md:p-8 space-y-8">
+      <main className="max-w-[1600px] mx-auto p-4 sm:p-6 md:p-8 space-y-6 md:space-y-8">
         
         {/* Welcome Section */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-6">
           <div className="space-y-1">
-            <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 flex items-center gap-3">
+            <h2 className="text-3xl font-semibold tracking-tight text-slate-900 flex items-center gap-3">
               Dashboard
               <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></div>
             </h2>
-            <p className="text-slate-500 font-bold text-sm">Kelola bot WhatsApp Anda secara real-time.</p>
+            <p className="text-slate-500 font-medium text-sm">Kelola bot WhatsApp Anda secara real-time.</p>
           </div>
           
           <Dialog>
             <DialogTrigger
               render={
                 <Button 
-                  className="bg-[#25d366] hover:bg-[#128c7e] text-white font-extrabold h-12 px-6 rounded-xl shadow-lg shadow-emerald-500/20 border-b-4 border-emerald-600 active:border-b-0 active:translate-y-1 transition-all"
+                  className="w-full md:w-auto bg-[#25d366] hover:bg-[#128c7e] text-white font-semibold h-12 px-6 rounded-xl shadow-lg shadow-emerald-500/20 border-b-4 border-emerald-600 active:border-b-0 active:translate-y-1 transition-all"
                   disabled={botState.status !== 'connected'}
                 />
               }
@@ -108,9 +111,9 @@ export function DashboardPage() {
               <Plus className="w-5 h-5 mr-2" />
               Siaran Baru
             </DialogTrigger>
-            <DialogContent className="bg-white border-slate-200 rounded-2xl shadow-2xl sm:max-w-lg">
+            <DialogContent className="bg-white border-slate-200 rounded-2xl shadow-2xl w-[95vw] sm:max-w-lg mx-auto">
               <DialogHeader className="border-b border-slate-100 pb-4">
-                <DialogTitle className="text-2xl font-bold text-slate-800 flex items-center gap-2">
+                <DialogTitle className="text-2xl font-medium text-slate-800 flex items-center gap-2">
                   <Send className="w-5 h-5 text-emerald-500" />
                   Kirim Pesan Siaran
                 </DialogTitle>
@@ -120,7 +123,7 @@ export function DashboardPage() {
               </DialogHeader>
               <div className="space-y-5 py-6">
                 <div className="space-y-2">
-                  <p className="text-xs font-bold text-slate-700 uppercase tracking-wider">Nomor Tujuan / JID</p>
+                  <p className="text-xs font-medium text-slate-700 uppercase tracking-wider">Nomor Tujuan / JID</p>
                   <Input 
                     placeholder="Contoh: 628xxx atau 123456789@g.us" 
                     value={broadcastJid}
@@ -129,7 +132,7 @@ export function DashboardPage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <p className="text-xs font-bold text-slate-700 uppercase tracking-wider">Isi Pesan</p>
+                  <p className="text-xs font-medium text-slate-700 uppercase tracking-wider">Isi Pesan</p>
                   <Textarea 
                     placeholder="Tulis pesan Anda di sini..." 
                     className="min-h-[120px] rounded-lg bg-slate-50 border-slate-200"
@@ -142,7 +145,7 @@ export function DashboardPage() {
                 <Button 
                   onClick={handleBroadcast} 
                   disabled={isBroadcasting}
-                  className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold h-11 rounded-lg"
+                  className="w-full bg-slate-900 hover:bg-slate-800 text-white font-medium h-11 rounded-lg"
                 >
                   {isBroadcasting ? 'Mengirim...' : 'Kirim Siaran Sekarang'}
                 </Button>
@@ -158,14 +161,14 @@ export function DashboardPage() {
           <Card className="bg-red-50 border-red-100 p-4 flex items-center gap-4 animate-in fade-in slide-in-from-top-4">
             <ServerOff className="w-5 h-5 text-red-500" />
             <div>
-              <p className="font-bold text-red-800 text-sm">Kesalahan Koneksi</p>
+              <p className="font-medium text-red-800 text-sm">Kesalahan Koneksi</p>
               <p className="text-red-600 text-xs font-medium">{botState.error}</p>
             </div>
           </Card>
         )}
 
         {/* Main Grid */}
-        <div className="grid lg:grid-cols-12 gap-6">
+        <div className="grid lg:grid-cols-12 gap-6 xl:gap-8">
           
           {/* Status Column */}
           <div className="lg:col-span-4 space-y-6">
@@ -178,7 +181,7 @@ export function DashboardPage() {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-xl font-bold tracking-tight">Bot Aktif</h3>
+                    <h3 className="text-xl font-medium tracking-tight">Bot Aktif</h3>
                     <p className="text-slate-500 text-sm font-medium leading-relaxed px-4">
                       Koneksi WhatsApp stabil. BobaSticker siap memproses pesan masuk.
                     </p>
@@ -188,7 +191,7 @@ export function DashboardPage() {
                       variant="outline" 
                       onClick={handleRestart}
                       disabled={isRestarting}
-                      className="rounded-lg border-slate-200 h-10 text-xs font-bold hover:bg-slate-50"
+                      className="rounded-lg border-slate-200 h-10 text-xs font-medium hover:bg-slate-50"
                     >
                       <RefreshCw className={`w-3.5 h-3.5 mr-2 ${isRestarting ? 'animate-spin' : ''}`} />
                       Restart
@@ -197,7 +200,7 @@ export function DashboardPage() {
                       variant="outline" 
                       onClick={handleBotLogout}
                       disabled={isLoggingOut}
-                      className="rounded-lg border-slate-200 h-10 text-xs font-bold hover:bg-red-50 hover:text-red-600 hover:border-red-100"
+                      className="rounded-lg border-slate-200 h-10 text-xs font-medium hover:bg-red-50 hover:text-red-600 hover:border-red-100"
                     >
                       <Power className="w-3.5 h-3.5 mr-2" />
                       Putus
@@ -207,13 +210,13 @@ export function DashboardPage() {
               ) : (
                 <div className="space-y-6 w-full flex flex-col items-center animate-in fade-in duration-700">
                   <div className="text-center space-y-1">
-                    <h3 className="text-xl font-bold tracking-tight text-slate-900">Tautkan Perangkat</h3>
+                    <h3 className="text-xl font-medium tracking-tight text-slate-900">Tautkan Perangkat</h3>
                     <p className="text-slate-500 text-sm font-medium">Scan QR dengan WhatsApp Anda</p>
                   </div>
                   <div className="p-3 bg-white rounded-xl border border-slate-100 shadow-md">
                     <QrDisplay qr={botState.qr} />
                   </div>
-                  <div className="flex items-center gap-2 text-[10px] font-bold text-slate-300 uppercase tracking-widest pt-4">
+                  <div className="flex items-center gap-2 text-[10px] font-medium text-slate-300 uppercase tracking-widest pt-4">
                     <span className="w-1.5 h-1.5 rounded-full bg-slate-200 animate-pulse"></span>
                     Menunggu Koneksi
                   </div>
@@ -225,11 +228,11 @@ export function DashboardPage() {
           {/* Settings & Logs Column */}
           <div className="lg:col-span-8 space-y-6">
             
-            <div className="grid lg:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-6 xl:gap-8">
               {/* Analytics Summary */}
               <Card className="p-6 bg-white border-slate-200 shadow-sm rounded-xl space-y-4">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                  <h3 className="text-base font-medium text-slate-900 flex items-center gap-2">
                     <Activity className="w-4 h-4" />
                     Lalu Lintas Pesan
                   </h3>
@@ -247,7 +250,7 @@ export function DashboardPage() {
             </div>
 
             {/* Activity Logs */}
-            <div className="h-[480px]">
+            <div className="h-auto">
               <ActivityLogs logs={botState.logs} />
             </div>
 
@@ -255,8 +258,8 @@ export function DashboardPage() {
         </div>
       </main>
       
-      <footer className="max-w-7xl mx-auto px-8 py-10 text-center border-t border-slate-50">
-        <p className="text-[10px] font-bold text-slate-300 uppercase tracking-[0.2em]">
+      <footer className="max-w-[1600px] mx-auto px-4 sm:px-8 py-8 sm:py-10 text-center border-t border-slate-50">
+        <p className="text-[10px] font-medium text-slate-300 uppercase tracking-[0.2em]">
           BobaSticker Admin Suite &copy; 2026
         </p>
       </footer>

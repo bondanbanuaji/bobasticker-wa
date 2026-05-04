@@ -21,25 +21,25 @@ export function ActivityLogs({ logs }: ActivityLogsProps) {
 
   return (
     <Card className="bg-white border-slate-200 shadow-sm rounded-2xl overflow-hidden flex flex-col h-full border-b-4 border-slate-100">
-      <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-[#075e54] text-white">
-        <h3 className="text-lg font-extrabold flex items-center gap-2 text-white">
+      <div className="p-4 sm:p-6 border-b border-slate-100 flex items-center justify-between bg-[#075e54] text-white">
+        <h3 className="text-base sm:text-lg font-semibold flex items-center gap-2 text-white">
           <Terminal className="w-5 h-5 text-emerald-300" />
           Log Aktivitas Terkini
         </h3>
-        <span className="text-[10px] font-black bg-white/20 px-3 py-1.5 rounded-full uppercase tracking-widest border border-white/20">
+        <span className="text-[10px] font-semibold bg-white/20 px-3 py-1.5 rounded-full uppercase tracking-widest border border-white/20">
           Live Feed
         </span>
       </div>
       
-      <ScrollArea className="flex-grow h-[450px] bg-[#f0f2f5]/50">
-        <div className="p-4 space-y-3">
+      <ScrollArea className="flex-grow h-[400px] md:h-[480px] xl:h-[600px] 2xl:h-[700px] bg-[#f0f2f5]/50">
+        <div className="p-3 sm:p-4 space-y-3">
           {logs.length === 0 ? (
-            <div className="py-24 text-center text-slate-400 text-sm font-bold italic bg-white rounded-2xl border-2 border-dashed border-slate-100">
+            <div className="py-24 text-center text-slate-400 text-sm font-medium italic bg-white rounded-2xl border-2 border-dashed border-slate-100">
               Menunggu aktivitas dari WhatsApp...
             </div>
           ) : (
             logs.map((log) => (
-              <div key={log.id} className="p-4 bg-white border border-slate-100 rounded-2xl shadow-sm hover:border-emerald-200 transition-all group relative overflow-hidden">
+              <div key={log.id} className="p-3 sm:p-4 bg-white border border-slate-100 rounded-2xl shadow-sm hover:border-emerald-200 transition-all group relative overflow-hidden">
                 <div className="absolute left-0 top-0 w-1 h-full bg-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex items-center gap-4 flex-grow">
@@ -47,10 +47,10 @@ export function ActivityLogs({ logs }: ActivityLogsProps) {
                       <Terminal className="w-4 h-4" />
                     </div>
                     <div className="flex flex-col gap-0.5">
-                      <p className="font-extrabold text-slate-800 text-sm tracking-tight">
+                      <p className="font-semibold text-slate-800 text-sm tracking-tight">
                         {formatAction(log.action)}
                       </p>
-                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-slate-500 font-bold uppercase tracking-widest">
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-slate-500 font-medium uppercase tracking-widest">
                         {log.metadata?.sender && (
                           <span className="flex items-center gap-1.5 text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">
                             <User className="w-3 h-3" />
@@ -73,9 +73,9 @@ export function ActivityLogs({ logs }: ActivityLogsProps) {
                     >
                       <FileJson className="w-5 h-5" />
                     </DialogTrigger>
-                    <DialogContent className="bg-white border-slate-200 rounded-2xl shadow-2xl sm:max-w-md">
+                    <DialogContent className="bg-white border-slate-200 rounded-2xl shadow-2xl w-[95vw] sm:max-w-md mx-auto">
                       <DialogHeader className="border-b border-slate-100 pb-4">
-                        <DialogTitle className="text-xl font-bold text-slate-800 flex items-center gap-2">
+                        <DialogTitle className="text-xl font-medium text-slate-800 flex items-center gap-2">
                           <Info className="w-5 h-5 text-blue-500" />
                           Detail Aktivitas
                         </DialogTitle>
@@ -83,34 +83,34 @@ export function ActivityLogs({ logs }: ActivityLogsProps) {
                       <div className="py-6 space-y-4">
                         <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 space-y-3">
                           <div className="grid grid-cols-3 gap-2">
-                            <span className="text-[10px] font-bold text-slate-400 uppercase">Aksi</span>
-                            <span className="col-span-2 text-sm font-bold text-slate-800">{formatAction(log.action)}</span>
+                            <span className="text-[10px] font-medium text-slate-400 uppercase">Aksi</span>
+                            <span className="col-span-2 text-sm font-medium text-slate-800">{formatAction(log.action)}</span>
                           </div>
                           <div className="grid grid-cols-3 gap-2">
-                            <span className="text-[10px] font-bold text-slate-400 uppercase">Waktu</span>
-                            <span className="col-span-2 text-sm font-bold text-slate-800">{new Date(log.createdAt).toLocaleString('id-ID')}</span>
+                            <span className="text-[10px] font-medium text-slate-400 uppercase">Waktu</span>
+                            <span className="col-span-2 text-sm font-medium text-slate-800">{new Date(log.createdAt).toLocaleString('id-ID')}</span>
                           </div>
                           {log.metadata?.pushName && (
                             <div className="grid grid-cols-3 gap-2">
-                              <span className="text-[10px] font-bold text-slate-400 uppercase">Nama WA</span>
-                              <span className="col-span-2 text-sm font-bold text-emerald-600">{log.metadata.pushName}</span>
+                              <span className="text-[10px] font-medium text-slate-400 uppercase">Nama WA</span>
+                              <span className="col-span-2 text-sm font-medium text-emerald-600">{log.metadata.pushName}</span>
                             </div>
                           )}
                           {log.metadata?.sender && (
                             <div className="grid grid-cols-3 gap-2">
-                              <span className="text-[10px] font-bold text-slate-400 uppercase">Nomor WA</span>
-                              <span className="col-span-2 text-sm font-bold text-slate-800">{log.metadata.sender}</span>
+                              <span className="text-[10px] font-medium text-slate-400 uppercase">Nomor WA</span>
+                              <span className="col-span-2 text-sm font-medium text-slate-800">{log.metadata.sender}</span>
                             </div>
                           )}
                           {log.metadata?.chatId && (
                             <div className="grid grid-cols-3 gap-2">
-                              <span className="text-[10px] font-bold text-slate-400 uppercase">ID Chat</span>
+                              <span className="text-[10px] font-medium text-slate-400 uppercase">ID Chat</span>
                               <span className="col-span-2 text-[10px] font-medium text-slate-500 break-all">{log.metadata.chatId}</span>
                             </div>
                           )}
                         </div>
                         <div className="p-4 bg-slate-900 rounded-xl">
-                          <p className="text-[10px] font-bold text-slate-500 uppercase mb-2 tracking-widest">Raw Metadata</p>
+                          <p className="text-[10px] font-medium text-slate-500 uppercase mb-2 tracking-widest">Raw Metadata</p>
                           <pre className="text-[10px] text-emerald-400 overflow-x-auto font-mono whitespace-pre-wrap">
                             {JSON.stringify(log.metadata, null, 2)}
                           </pre>

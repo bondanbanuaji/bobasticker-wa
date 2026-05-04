@@ -125,7 +125,7 @@ export function AnalyticsChart() {
   }, []);
 
   return (
-    <div className="w-full h-[250px] relative">
+    <div className="w-full h-[200px] sm:h-[250px] lg:h-[300px] xl:h-[350px] relative">
       <canvas ref={chartRef} />
     </div>
   );
