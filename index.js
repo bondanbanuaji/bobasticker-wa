@@ -33,6 +33,13 @@ const helpHandler = require('./lib/commands/help');
 const PREFIX = process.env.PREFIX || '.';
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
 
+// Helper to get allowed origins
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://bobasticker-wa.vercel.app',
+  FRONTEND_URL
+].filter((val, index, self) => self.indexOf(val) === index);
+
 // ─────────────────────────────────────────────
 // Setup Express
 // ─────────────────────────────────────────────
@@ -40,16 +47,23 @@ const app = express();
 const server = http.createServer(app);
 
 // Security Middleware
-app.use(helmet());
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" }
+}));
 app.use(cors({
-  origin: FRONTEND_URL,
-  methods: ['GET', 'POST'],
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
+  max: 100, 
   standardHeaders: true,
   legacyHeaders: false,
 });
@@ -67,7 +81,7 @@ const PORT = process.env.PORT || 3000;
 // ─────────────────────────────────────────────
 const io = new Server(server, {
   cors: {
-    origin: FRONTEND_URL,
+    origin: allowedOrigins,
     methods: ["GET", "POST"],
     credentials: true
   }
