@@ -71,7 +71,7 @@ export function DashboardPage() {
           
           <div className="flex items-center gap-4">
             <div className="hidden md:flex items-center gap-2 px-4 py-1.5 bg-[#128c7e] border border-[#25d366]/20 rounded-full shadow-sm">
-              <StatusBadge status={botState.status} />
+              <StatusBadge status={botState.isReconnecting ? 'reconnecting' : botState.status} />
             </div>
             
             <div className="w-px h-6 bg-white/20 mx-1 hidden md:block"></div>
@@ -104,7 +104,7 @@ export function DashboardPage() {
               render={
                 <Button 
                   className="w-full md:w-auto bg-[#25d366] hover:bg-[#128c7e] text-white font-semibold h-12 px-6 rounded-xl shadow-lg shadow-emerald-500/20 border-b-4 border-emerald-600 active:border-b-0 active:translate-y-1 transition-all"
-                  disabled={botState.status !== 'connected'}
+                  disabled={botState.status !== 'connected' || !botState.socketConnected}
                 />
               }
             >
@@ -159,10 +159,12 @@ export function DashboardPage() {
 
         {botState.error && (
           <Card className="bg-red-50 border-red-100 p-4 flex items-center gap-4 animate-in fade-in slide-in-from-top-4">
-            <ServerOff className="w-5 h-5 text-red-500" />
+            <ServerOff className={`w-5 h-5 ${botState.isReconnecting ? 'text-orange-500 animate-pulse' : 'text-red-500'}`} />
             <div>
               <p className="font-medium text-red-800 text-sm">Kesalahan Koneksi</p>
-              <p className="text-red-600 text-xs font-medium">{botState.error}</p>
+              <p className="text-red-600 text-xs font-medium">
+                {botState.error} {botState.isReconnecting && '(Mencoba menghubungkan kembali...)'}
+              </p>
             </div>
           </Card>
         )}
@@ -190,7 +192,7 @@ export function DashboardPage() {
                     <Button 
                       variant="outline" 
                       onClick={handleRestart}
-                      disabled={isRestarting}
+                      disabled={isRestarting || !botState.socketConnected}
                       className="rounded-lg border-slate-200 h-10 text-xs font-medium hover:bg-slate-50"
                     >
                       <RefreshCw className={`w-3.5 h-3.5 mr-2 ${isRestarting ? 'animate-spin' : ''}`} />
@@ -199,7 +201,7 @@ export function DashboardPage() {
                     <Button 
                       variant="outline" 
                       onClick={handleBotLogout}
-                      disabled={isLoggingOut}
+                      disabled={isLoggingOut || !botState.socketConnected}
                       className="rounded-lg border-slate-200 h-10 text-xs font-medium hover:bg-red-50 hover:text-red-600 hover:border-red-100"
                     >
                       <Power className="w-3.5 h-3.5 mr-2" />

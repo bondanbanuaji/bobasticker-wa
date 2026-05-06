@@ -8,7 +8,8 @@ export function StatusBadge({ status }: StatusBadgeProps) {
   const getStatusColor = () => {
     switch (status) {
       case 'connected': return 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]';
-      case 'connecting': return 'bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)]';
+      case 'connecting': return 'bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)] animate-pulse';
+      case 'reconnecting': return 'bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.5)] animate-bounce';
       case 'offline': return 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]';
       case 'qr': return 'bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)] animate-pulse';
       default: return 'bg-gray-500';
@@ -19,6 +20,7 @@ export function StatusBadge({ status }: StatusBadgeProps) {
     switch (status) {
       case 'connected': return 'Connected';
       case 'connecting': return 'Connecting...';
+      case 'reconnecting': return 'Reconnecting...';
       case 'offline': return 'Offline';
       case 'qr': return 'Waiting for Scan';
       default: return 'Unknown';

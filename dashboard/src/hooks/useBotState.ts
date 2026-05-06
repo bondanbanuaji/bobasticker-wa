@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getSocket, disconnectSocket } from '../lib/socket';
 
-export type BotStatus = 'offline' | 'connecting' | 'qr' | 'connected';
+export type BotStatus = 'offline' | 'connecting' | 'reconnecting' | 'qr' | 'connected';
 
 export interface BotLog {
   id: string;
@@ -37,6 +37,7 @@ export function useBotState() {
   const [logs, setLogs] = useState<BotLog[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [socketConnected, setSocketConnected] = useState(false);
+  const [isReconnecting, setIsReconnecting] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -46,20 +47,49 @@ export function useBotState() {
         const socket = await getSocket();
         
         socket.on('connect', () => {
-          if (mounted) setSocketConnected(true);
+          if (mounted) {
+            setSocketConnected(true);
+            setIsReconnecting(false);
+            setError(null);
+          }
         });
 
-        socket.on('disconnect', () => {
-          if (mounted) setSocketConnected(false);
+        socket.on('disconnect', (reason) => {
+          if (mounted) {
+            setSocketConnected(false);
+            if (reason === 'io server disconnect' || reason === 'transport close' || reason === 'transport error') {
+              setIsReconnecting(true);
+            }
+          }
         });
 
         socket.on('connect_error', (err) => {
           console.error('Socket connection error:', err);
-          if (mounted) setError('Failed to connect to Bot Server');
+          if (mounted) {
+            setError('Failed to connect to Bot Server');
+            setIsReconnecting(true);
+          }
+        });
+
+        socket.on('reconnect_attempt', () => {
+          if (mounted) {
+            setIsReconnecting(true);
+          }
+        });
+
+        socket.on('reconnect', () => {
+          if (mounted) {
+            setIsReconnecting(false);
+            setSocketConnected(true);
+            setError(null);
+          }
         });
 
         socket.on('state', (data: BotState) => {
-          if (mounted) setState(data);
+          if (mounted) {
+            setState(data);
+            setError(null);
+          }
         });
 
         socket.on('logs', (data: BotLog[]) => {
@@ -93,6 +123,7 @@ export function useBotState() {
     logs,
     error,
     socketConnected,
+    isReconnecting,
     logout: () => sendCommand('logout'),
     restart: () => sendCommand('restart'),
     updateConfig: (config: Partial<BotConfig>) => sendCommand('update_config', config),
