@@ -456,3 +456,15 @@ server.listen(PORT, () => {
   log(TAG.INFO, `API Server berjalan di http://localhost:${PORT}`);
   startBot();
 });
+
+// ─────────────────────────────────────────────
+// Global Error Handlers (Mencegah Bot Mati Total)
+// ─────────────────────────────────────────────
+process.on('uncaughtException', (err) => {
+  console.error('❌ FATAL ERROR (uncaughtException):', err);
+  // Biarkan bot tetap berjalan, jangan di-exit
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('❌ UNHANDLED REJECTION:', reason);
+});
