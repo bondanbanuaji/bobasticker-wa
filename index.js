@@ -27,6 +27,7 @@ const { verifyAdmin, logActivity } = require('./lib/auth');
 
 // Import handlers
 const stickerHandler = require('./lib/commands/sticker');
+const gerakHandler = require('./lib/commands/gerak');
 const pingHandler = require('./lib/commands/ping');
 const helpHandler = require('./lib/commands/help');
 
@@ -402,6 +403,17 @@ async function startBot() {
             sender: from, 
             pushName: pushName,
             type: msgType,
+            chatId: msg.key.remoteJid 
+          });
+          break;
+        case 'gerak':
+        case 'sg':
+          await gerakHandler(sock, msg);
+          log(TAG.OK, `.gerak selesai diproses`, `untuk: ${from}`);
+          await logActivity('sticker_created', 'system', { 
+            sender: from, 
+            pushName: pushName,
+            type: 'video',
             chatId: msg.key.remoteJid 
           });
           break;
